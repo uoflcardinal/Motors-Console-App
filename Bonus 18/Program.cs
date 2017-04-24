@@ -21,28 +21,32 @@ namespace Bonus_18
             Console.WriteLine("Welcome to the Grand Circus Motors admin console!\n\n");
 
             Console.Write("How many cars are you entering: ");
-            numOfCars = int.Parse(Console.ReadLine());
+            numOfCars = Validator.GetValidInteger();
 
-            int[] newCars = new int[numOfCars];
+            Car[] newCars = new Car[numOfCars];
 
-
-
-            for (int i = 1; i <= numOfCars; i++)
+            for (int i = 0; i <= numOfCars - 1; i++)
             {
-                Console.WriteLine("Enter Car #{0} Make: ", i);
-                Make = Console.ReadLine();
-                Console.WriteLine("Enter Car #{0} Model: ", i);
-                Model = Console.ReadLine();
-                Console.WriteLine("Enter Car #{0} Year: ", i);
-                Year = int.Parse(Console.ReadLine());
-                Console.WriteLine("Enter Car #{0} Price: ", i);
-                Price = decimal.Parse(Console.ReadLine());
+                Console.WriteLine("Enter Car #{0} Make: ", i + 1);
+                Make = Validator.GetValidString();
+                Console.WriteLine("Enter Car #{0} Model: ", i + 1);
+                Model = Validator.GetValidString();
+                Console.WriteLine("Enter Car #{0} Year: ", i + 1);
+                Year = Validator.GetValidInteger();
+                Console.WriteLine("Enter Car #{0} Price: ", i + 1);
+                Price = Validator.GetValidDecimal();
 
                 Car c = new Car(Make, Model, Year, Price);
 
-                Console.WriteLine("Current Inventory:");
-                Console.WriteLine("{0}\t\t{1}\t\t{2}\t\t{3}\t\t", c.Make, c.Model, c.Year, c.Price);
-            }          
+                newCars[i] = c;
+            }
+
+            Console.WriteLine("Current Inventory:");
+
+            for (int i = 0; i <= numOfCars - 1; i++)
+            {
+                Console.WriteLine("{0}{1}{2}${3}", newCars[i].Make.PadRight(10), newCars[i].Model.PadRight(10), newCars[i].Year.ToString().PadRight(10), newCars[i].Price);
+            }
         }
     }
 }
